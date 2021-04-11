@@ -1,7 +1,0 @@
-spring:
-  cloud:
-    config:
-      uri: http://IP:55000
-      name: rabbit
-      label: master
-      profile: dev
