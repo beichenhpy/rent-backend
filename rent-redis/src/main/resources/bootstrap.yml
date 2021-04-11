@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      uri: http://IP:55000
+      name: redis
+      label: master
+      profile: dev
+
+
+
+

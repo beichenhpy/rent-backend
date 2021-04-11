@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: redis-service
+  redis:
+    password: beichen
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    sentinel:
+      master: mymaster
+      nodes: RedisIP:26379,RedisIP:26380,RedisIP:26381
+server:
+  port: 53100
+
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://IP:53000/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+

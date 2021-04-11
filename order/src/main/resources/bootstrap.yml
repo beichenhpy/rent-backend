@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      uri: http://IP:55000
+      name: order
+      label: master
+      profile: dev
+      #oauth2必须使用允许重复定义bean
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+

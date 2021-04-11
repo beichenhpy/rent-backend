@@ -1,0 +1,104 @@
+spring:
+  application:
+    name: api-gateway
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: UAA-SERVER
+          uri: lb://uaa-service
+          predicates:
+            - Path=/uaa/**
+          filters:
+            - StripPrefix=1
+        - id: RENT-SERVER
+          uri: lb://rent-service
+          predicates:
+            - Path=/rent/**
+          filters:
+            - StripPrefix=1
+        - id: USER-SERVER
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: HOUSE-SERVER
+          uri: lb://house-service
+          predicates:
+            - Path=/house/**
+          filters:
+            - StripPrefix=1
+        - id: FILE-SERVER
+          uri: lb://file-service
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1
+        - id: ORDER-SERVER
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+        - id: REDIS-SERVER
+          uri: lb://redis-service
+          predicates:
+            - Path=/redis/**
+          filters:
+            - StripPrefix=1
+        - id: COMMENT-SERVER
+          uri: lb://comment-service
+          predicates:
+            - Path=/comment/**
+          filters:
+            - StripPrefix=1
+        - id: ADMIN-SERVER
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://IP:53000/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+server:
+  port: 53010
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000  # 设置熔断超时时间  default 1000
+        timeout:
+          enabled: true # 打开超时熔断功能 default true
+
+
+ribbon:
+  ConnectTimeout: 600 # 设置连接超时时间 default 2000
+  ReadTimeout: 6000    # 设置读取超时时间  default 5000
+  OkToRetryOnAllOperations: true # 对所有操作请求都进行重试  default false
+  MaxAutoRetriesNextServer: 2    # 切换实例的重试次数  default 1
+  MaxAutoRetries: 1     # 对当前实例的重试次数 default 0
