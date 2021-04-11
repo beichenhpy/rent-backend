@@ -1,0 +1,8 @@
+server:
+  port: 53055
+
+spring:
+  application:
+    name: rabbitmq_rent
+  rabbitmq:
+    host: RabbitIP

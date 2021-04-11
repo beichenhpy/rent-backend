@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      uri: http://IP:55000
+      name: gateway
+      label: master
+      profile: dev
+  main:
+    allow-bean-definition-overriding: true
