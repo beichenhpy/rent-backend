@@ -39,7 +39,7 @@ public class LoginController {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new BasicAuthenticationInterceptor("user", "123"));
         OAuth2AccessToken token = restTemplate.postForObject("http://localhost:53020/oauth/token", paramsMap, OAuth2AccessToken.class);
-        if (token.getValue() == null) {
+        if (token == null) {
             return Message.loginFail(ResponseConstant.LOGINFAIL);
         } else {
             return Message.requestSuccess(token);

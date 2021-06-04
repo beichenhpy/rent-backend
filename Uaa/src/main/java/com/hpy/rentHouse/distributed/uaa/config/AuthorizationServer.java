@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -74,7 +75,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         //令牌增强
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         //jwt存储Token设置
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtAccessTokenConverter));
+        tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(jwtAccessTokenConverter));
         service.setTokenEnhancer(tokenEnhancerChain);
         //access_token过期时间
         service.setAccessTokenValiditySeconds(25920);
